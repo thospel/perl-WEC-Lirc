@@ -1,0 +1,62 @@
+begin bright
+begin
+
+        prog    = xawtv
+        button  = function
+        mode    = hue
+end
+# A comment
+begin
+        prog   = xawtv
+        button = fn+
+        config = bright +6554
+end
+begin
+        prog   = xawtv
+        button = fn-
+        config = bright -6554
+end
+end bright
+
+begin hue
+begin
+        prog    = xawtv
+        button  = function
+        mode    = contrast
+end
+begin
+        prog   = xawtv
+        button = fn+
+        config = hue +6554
+end
+begin
+        prog   = xawtv
+        button = fn-
+        config = hue -6554
+end
+end hue
+
+begin contrast
+begin
+        prog    = xawtv
+        button  = function
+        mode    = bright
+end
+begin
+        prog   = xawtv
+        button = fn+
+        config = contrast +6554
+end
+begin
+        prog   = xawtv
+        button = fn-
+        config = contrast -6554
+end
+end contrast
+include <~/.lircrc>
+begin
+        prog    = xawtv
+        button  = function
+        mode    = bright
+        flags   = startup_mode
+end

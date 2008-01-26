@@ -1,0 +1,60 @@
+#!/usr/bin/perl -w
+use strict;
+use lib "/home/ton/perl-modules/WEC-Lirc/blib/lib";
+use lib "/home/ton/perl-modules/WEC-Lirc/blib/arch";
+
+use Data::Dumper;
+use WEC qw(loop);
+use WEC::Lirc::Client;
+
+WEC->init;
+my $client = WEC::Lirc::Client->new(Program	=> shift,      
+                                    ConfigFile	=> shift,
+                                    ServerHup	=> \&async,
+                                    Callback	=> \&click);
+print STDERR "Program = ", $client->program, "\n";
+my $conn = $client->connect;
+# $conn->version;
+$conn->version(\&version);
+# $conn->remotes(\&remotes);
+$conn->hit(\&hit, "hauppauge_pvr", "green");
+$conn->press(\&hit, "hauppauge_pvr", "green");
+$conn->release(\&hit, "hauppauge_pvr", "green");
+loop();
+
+sub click {
+    shift;
+    # print Dumper(\@_);
+    print STDERR shift, "\n";
+}
+
+sub version {
+    print "@_\n";
+}
+
+sub async {
+    print "@_\n";
+}
+
+sub remotes {
+    my ($connection, $what, $remotes) = @_;
+    if ($what eq "remotes") {
+        print "Remotes: @$remotes\n";
+        $connection->buttons(\&buttons, $_) for @$remotes;
+    } else {
+        print "remotes problem: @_\n";
+    }
+}
+
+sub buttons {
+    my ($connection, $what, $buttons, undef, $remote) = @_;
+    if ($what eq "buttons") {
+        print "Buttons $remote: ", Dumper($buttons);
+    } else {
+        print "buttons problem: @_\n";
+    }
+}
+
+sub hit {
+    print "Hit: @_\n";
+}

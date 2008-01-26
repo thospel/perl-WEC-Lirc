@@ -1,0 +1,16 @@
+#!/usr/bin/perl -w
+use strict;
+use lib "/home/ton/perl-modules/WEC-Lirc/blib/lib";
+use lib "/home/ton/perl-modules/WEC-Lirc/blib/arch";
+
+use Data::Dumper;
+use WEC qw(loop);
+use WEC::Lirc::Server;
+
+WEC->init;
+my $server = WEC::Lirc::Server->new
+    (Listen => "tcp://localhost",
+     Version => "boem 0.5",
+     SendOnce => sub { shift->success(shift, "waf") },
+     ConfigFile => "");
+loop();
