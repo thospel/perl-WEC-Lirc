@@ -6,7 +6,7 @@ use Carp;
 use POSIX qw(ENOENT EISDIR);
 use FindBin qw($Script);
 
-our $VERSION = "0.01";
+our $VERSION = "1.000";
 our @CARP_NOT	= qw(WEC::FieldClient WEC::Lirc::Connection);
 
 use WEC::Lirc::Connection;

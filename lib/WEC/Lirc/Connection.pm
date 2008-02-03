@@ -3,7 +3,7 @@ use 5.008;
 use strict;
 use warnings;
 
-our $VERSION = "0.01";
+our $VERSION = "1.000";
 use base qw(WEC::Connection);
 
 package WEC::Lirc::Connection::Client;

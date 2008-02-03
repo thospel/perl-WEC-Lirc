@@ -18,3 +18,4 @@ lib/WEC/Lirc/Server.pm
 lib/WEC/Lirc/Connection.pm
 lib/WEC/Lirc/Constants.pm
 META.yml                                 Module meta-data (added by MakeMaker)
+md5-versions
