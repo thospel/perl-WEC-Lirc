@@ -103,7 +103,7 @@ sub include_config {
                     next;
                 }
                 next if $config->{program} ne delete $block->{prog};
-                croak "Flag 'once' but no 'mode' directive" if 
+                croak "Flag 'once' but no 'mode' directive" if
                     $block->{flags}{once} && !exists $block->{mode};
                 if ($block->{flags}{startup_mode}) {
                     for (qw(remote button repeat delay config)) {
@@ -111,14 +111,14 @@ sub include_config {
                         croak "'$_' makes no sense in a 'startup_mode' block"
                             if exists $block->{$_};
                     }
-                    croak "Flag 'startup_mode' but no 'mode' directive" if 
+                    croak "Flag 'startup_mode' but no 'mode' directive" if
                         !exists $block->{mode};
                     delete $block->{flags}{startup_mode};
                     croak("Extra flags don't make sense with 'startup_mode': ",
-                          join(", ", keys %{$block->{flags}})) if 
+                          join(", ", keys %{$block->{flags}})) if
                           %{$block->{flags}};
                     croak "Already have a startup_mode for program '$config->{program}': $config->{map}{''}{''}{$config->{program}}" if exists $config->{"map"}{""}{""}{$config->{program}};
-                    $config->{"map"}{""}{""}{$config->{program}} = 
+                    $config->{"map"}{""}{""}{$config->{program}} =
                         $block->{mode};
                 } else {
                     croak "No 'button' definition" unless $block->{button};
@@ -157,9 +157,9 @@ sub include_config {
                 for my $flag (split /[\s|]+/, $flags) {
                     croak "Unknown flag '$flag'" unless
                         exists $lircrc_flags{lc $flag};
-                    croak "flag '$flag' while not inside a mode block" if 
+                    croak "flag '$flag' while not inside a mode block" if
                         lc $flag eq "mode" && $config->{mode} eq "";
-                    croak "flag '$flag' while inside a mode block" if 
+                    croak "flag '$flag' while inside a mode block" if
                         lc $flag eq "startup_mode" && $config->{mode} ne "";
                     croak "Duplicate flag '$flag'" if
                         exists $config->{block}{flags}{lc $flag};

@@ -151,7 +151,7 @@ sub get_reply_optional {
                     # Silly enough, next will come a SECOND answer,
                     # but doing a plain list
                     # Set up a fake extra expected answer
-                    splice(@{$connection->{answers}}, 1, 0, 
+                    splice(@{$connection->{answers}}, 1, 0,
                            [$connection->{answers}[0][0], undef, 1]);
                     $connection->_callback(-error => @{$reply->{data}});
                     return;

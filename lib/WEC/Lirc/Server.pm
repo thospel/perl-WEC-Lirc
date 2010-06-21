@@ -40,7 +40,7 @@ sub init {
         croak "Newline in Version" if $version =~ /\n/;
     }
     my $options = $server->{options};
-    $options->{Config} = $server->parse_config if 
+    $options->{Config} = $server->parse_config if
         exists $options->{ConfigFile};
 }
 
