@@ -1,6 +1,7 @@
 Revision history for Perl extension WEC::Lirc.
 
-1.000	2011-09-04 12:37:45 UT
+1.000	2020-11-19 17:26:58 UT
+	- Added downgrade version check
 
 0.01  Sun Oct  3 20:02:01 2004
 	- original version; created by h2xs 1.23 with options

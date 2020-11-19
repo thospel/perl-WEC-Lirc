@@ -1,8 +1,13 @@
 #!/usr/bin/perl -w
 # $Id: Makefile.PL 2693 2008-01-02 09:54:19Z hospelt $
 use 5.008004;
+use strict;
+use warnings;
 use ExtUtils::MakeMaker;
+
 our $VERSION = '1.000';
+
+settings();
 
 WriteMakefile
     (NAME		=> 'WEC::Lirc',
@@ -21,7 +26,7 @@ WriteMakefile
          PM_FILTER	=> '$(PERL) -p -e1',
      ) : (),
      clean		=> {
-         FILES => '$(DISTNAME).ppd ppm cover_db',
+         FILES => '$(DISTNAME).ppd ppm cover_db nytprof nytprof.out* md5-versions.old',
      },
     );
 
@@ -74,7 +79,7 @@ ppm_uninstall:
 	ppm uninstall $(DISTNAME)
 EOT
 
-undef &postamble;	## no critic (ProhibitUselessNoCritic ProhibitAmpersandSigils)
+undef &postamble;	## no critic (UselessNoCritic AmpersandSigils)
 }
 {
     package MY;
@@ -83,3 +88,13 @@ undef &postamble;	## no critic (ProhibitUselessNoCritic ProhibitAmpersandSigils)
     }
 }
 # END MY
+
+sub settings {
+    package MY;
+    our %postamble;
+
+    $postamble{version_check} = <<'EOF';
+all ::
+	$(NOECHO) $(FULLPERL) version_check "$(NAME)" "$(DESTINSTALLSITELIB)" "$(VERSION)" "$(VERSION_FROM)"
+EOF
+}
